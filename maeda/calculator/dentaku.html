@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dentaku</title>
+</head>
+<body>
+    <input type="text" id="result">
+    <!--
+
+        C %÷
+        789x
+        456-
+        123+
+         0.=
+    -->
+    <div>
+        <input type="button" value="C" onclick="reset()">
+        <input type="button" value="">
+        <input type="button" value="%">
+        <input type="button" value="÷" onclick="calc(this)">
+    </div>
+    <div>
+        <input type="button" value="7" onclick="edit(this)">
+        <input type="button" value="8" onclick="edit(this)">
+        <input type="button" value="9" onclick="edit(this)">
+        <input type="button" value="x" onclick="calc(this)">
+    </div>
+    <div>
+        <input type="button" value="4" onclick="edit(this)">
+        <input type="button" value="5" onclick="edit(this)">
+        <input type="button" value="6" onclick="edit(this)">
+        <input type="button" value="-" onclick="calc(this)">
+    </div>
+    <div>
+        <input type="button" value="1" onclick="edit(this)">
+        <input type="button" value="2" onclick="edit(this)">
+        <input type="button" value="3" onclick="edit(this)">
+        <input type="button" value="+" onclick="calc(this)">
+    </div>
+    <div>
+        <input type="button" value="">
+        <input type="button" value="0" onclick="edit(this)">
+        <input type="button" value="." onclick="edit(this)">
+        <input type="button" value="=" onclick="calc(this)">
+    </div>
+    <script language="javascript" type="text/javascript">
+
+        var result = document.getElementById("result");
+        var memory = 0;
+        var ans = 0;
+        var flag = 1 //前が数字1, 前が記号0
+        var Total = 0;
+        function edit(element)
+        {
+            if(flag == 1)
+            { 
+                result.value = result.value + element.value;
+            }
+            else
+            {
+                flag = 1;
+                result.value += element.value;
+            }
+        }
+
+        function calc(element1)
+        {
+            if(flag == 1)
+            if (element1.value == "+")
+            {   
+                ans += memory;
+                memory = ans;
+                result.value = "";
+            }
+
+            if (element1.value == "-")
+            {
+                ans -= memory;
+                memory = ans;
+                result.value = "";
+            }
+
+            if (element1.value == "x")
+            {
+                ans *= memory;
+                memory = ans;
+                result.value = "";
+            }
+
+            if (element1.value == "รท")
+            {
+                ans = memory / ans;
+                memory = ans;
+                result.value = "";
+            }
+
+            if (element1.value == "=")
+            {
+
+                result.value = memory.value;
+            }
+
+        }
+        function reset()
+        {
+            result.value = "";
+            memory.value = "";
+        }
+    </script>
+</body>
+</html>
