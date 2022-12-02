@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dentaku4</title>
+    <style>
+        body
+        {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #container
+        {
+            display: inline-block;
+            background-color: black;
+            padding: 5px;
+        }
+        #result
+        {
+            height: 50px;
+            border: solid 1px rgb(88, 88, 88);
+            background-color: #e4e4e4;
+        }
+        table
+        {
+            table-layout: fixed;
+        }
+        td
+        {
+            width: 38px;
+            height: 38px;
+        }
+        button
+        {
+            width: 100%;
+            height: 100%;
+            border: solid 1px rgb(88, 88, 88);
+            background-color: white;
+        }
+        button:active
+        {
+            background-color: #e4e4e4;
+        }
+    </style>
+</head>
+<body>
+    <div id = "container">
+        <div id = "result"></div>
+        <table>
+        <tbody>
+            <tr>
+                <td colspan="2"><button type="button" value="#" onclick="reset()">AC</button></td>
+                <td><button type="button" value="%" >%</button></td>
+                <td><button type="button" value="/" onclick="calc(this)">÷</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" value="7" onclick="edit(this)">7</button></td>
+                <td><button type="button" value="8" onclick="edit(this)">8</button></td>
+                <td><button type="button" value="9" onclick="edit(this)">9</button></td>
+                <td><button type="button" value="*" onclick="calc(this)">x</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" value="4" onclick="edit(this)">4</button></td>
+                <td><button type="button" value="5" onclick="edit(this)">5</button></td>
+                <td><button type="button" value="6" onclick="edit(this)">6</button></td>
+                <td><button type="button" value="-" onclick="calc(this)">-</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" value="1" onclick="edit(this)">1</button></td>
+                <td><button type="button" value="2" onclick="edit(this)">2</button></td>
+                <td><button type="button" value="3" onclick="edit(this)">3</button></td>
+                <td><button type="button" value="+" onclick="calc(this)">+</button></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="button" value="0" onclick="edit(this)">0</button></td>
+                <td><button type="button" value="." onclick="calc(this)">.</button></td>
+                <td><button type="button" value="=" onclick="calc(this)">=</button></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <script language="javascript">
+        let text = "";
+        let memory = 0;
+        let ans = 0;
+        let flag = 1 //前が数字1, 前が記号0
+        let calc_flag = "+"
+        let Total = 0;
+
+       function  calc(element)
+       {
+            if(flag == 0)
+            {
+                flag = 1;
+                switch(calc_flag)
+                {
+                    case("+"):
+                    {
+                        memory = parseInt(text);
+                        ans = Total + memory;
+                        Total = ans;
+                        text = String(ans);
+                        result.textContent = text;
+                        break;
+                    }
+                    case("-"):
+                    {
+                        memory = parseInt(text);
+                        ans = Total - memory;
+                        Total = ans;
+                        text = String(ans);
+                        result.textContent = text;
+                        break;
+                    }
+                    case("*"):
+                    {
+                        memory = parseInt(text);
+                        ans = Total * memory;
+                        Total = ans;
+                        text = String(ans);
+                        result.textContent = text;
+                        break;
+                    }
+                    case("/"):
+                    {
+                        memory = parseInt(text);
+                        ans = Total / memory;
+                        Total = ans;
+                        text = String(ans);
+                        result.textContent = text;
+                        break;
+                    }
+                }
+            }
+
+            if(element == "=")
+            {
+                memory = 0;
+                calc_flag = "+";
+            }
+            else
+            {
+                calc_flag = element.value;
+            }
+
+       }
+
+       function edit(element1)
+       {
+            if(flag == 1)
+            {
+                flag = 0;
+                text = element1.value;
+                result.textContent = text;
+
+            }
+            else
+            {
+                text += element1.value;
+                result.textContent = text;
+            }
+       }
+
+       function reset()
+       {
+        text = "";
+        Total = 0;
+        ans = 0;
+        memory = 0;
+        flag = 1;
+        calc_flag = "+";
+        result.textContent = text;
+       }
+    </script>
+</body>
+</html>
