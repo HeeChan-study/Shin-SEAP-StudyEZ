@@ -46,13 +46,18 @@
         <input type="button" value="." onclick="edit(this)">
         <input type="button" value="=" onclick="calc(this)">
     </div>
-    <script language="javascript" type="text/javascript">
+
+    <script language="javascript" type="text/javascript"> //javascriptと明示するのはいらない
 
         var result = document.getElementById("result");
         var memory = 0;
         var ans = 0;
-        var flag = 1 //前が数字1, 前が記号0
+        var flag = 1 //前が数字1, 前が記号0　// flag どこに使う？
+        var isSimbol = false; //記号チェック
         var Total = 0;
+
+        // 順番に2 + 2 = 入力されたらどうなるかよく考える。
+        // 僕からは直しません
         function edit(element)
         {
             if(flag == 1)
@@ -64,51 +69,75 @@
                 flag = 1;
                 result.value += element.value;
             }
+
+            isSimbol = false;
         }
 
         function calc(element1)
         {
-            if(flag == 1)
+            // 記号複数入力処理
+            if(isSimbol){
+                result.value = "";
+                return;
+            }
+
+            //if(flag == 1) //　波かっこどこ？
+            // switch　は？
             if (element1.value == "+")
             {   
-                ans += memory;
-                memory = ans;
+                //ans += memory;
+                //memory = ans;
+                memory += result.value;
                 result.value = "";
+                isSimbol = true;
             }
 
             if (element1.value == "-")
             {
-                ans -= memory;
-                memory = ans;
+                //ans -= memory;
+                //memory = ans;
+                memory -= result.value;
                 result.value = "";
+                isSimbol = true;
             }
 
             if (element1.value == "x")
             {
-                ans *= memory;
-                memory = ans;
+                //ans *= memory;
+                //memory = ans;
+                memory *= result.value;
                 result.value = "";
+                isSimbol = true;
             }
 
             if (element1.value == "รท")
             {
-                ans = memory / ans;
-                memory = ans;
+                //ans = memory / ans;
+                //memory = ans;
+                memory /= result.value;
                 result.value = "";
+                isSimbol = true;
             }
 
             if (element1.value == "=")
             {
-
-                result.value = memory.value;
+                //result.value = memory.value;
+                result.value = memory;
+                isSimbol = true;
             }
 
         }
         function reset()
         {
             result.value = "";
-            memory.value = "";
+            //memory.value = "";
+            memory = 0;
         }
+
+        /*
+         * ちゃんと機能するのかチェックしなかった。
+         * 簡単なものでもいいのでバグがあるのか自分で試してみること
+        */
     </script>
 </body>
 </html>

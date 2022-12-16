@@ -82,12 +82,20 @@
         </table>
     </div>
     <script language="javascript">
+        // 変数名をもっと詳しく
         let text = "";
         let memory = 0;
         let ans = 0;
         let flag = 1 //前が数字1, 前が記号0
         let calc_flag = "+"
         let Total = 0;
+
+        // let result = document.querySelector("#result");ですること。
+        // resultが変数なのか、HTMLのidなのかコードが長くなると全然わからなくなる
+        // 入力される場合をいくつも作ってそれに沿って関数がちゃんと機能しているのか確認すること。
+        // 例１. 2 + 2 = 1 + 10 =
+        // 例２. 1 * * - - + + - + 2 =
+
 
        function  calc(element)
        {
@@ -138,6 +146,8 @@
             if(element == "=")
             {
                 memory = 0;
+                //ans = 0;
+                //Total = 0;
                 calc_flag = "+";
             }
             else

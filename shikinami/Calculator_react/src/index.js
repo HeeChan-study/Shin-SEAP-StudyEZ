@@ -2,6 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
+// ちゃんと機能するのかもっとテストしてみること。
+// 入力される場合をいっぱい仮定してみる。
+// コードをもっと分かりやすく、読みやすくするにはどうしたらいいのかもっと考えてみること。
+
 class Calculator extends React.Component
 {
     constructor(props) {
